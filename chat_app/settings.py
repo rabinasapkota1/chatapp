@@ -136,6 +136,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+import os
+AES_KEY_B64 = os.environ.get("AES_KEY_B64")  # base64-encoded 32 bytes
+
 STATIC_URL = 'static/'
 
 # Default primary key field type
