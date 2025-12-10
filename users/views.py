@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
-
-
 def login_page(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -16,11 +14,11 @@ def login_page(request):
         if user is not None:
             login(request, user)
             messages.success(request, 'Login successful!')
-            return redirect('/chat/rabina/')
+            return redirect('/chat/user/')
         else:
             messages.error(request, 'Invalid email or password. Please try again.')
     if request.user.is_authenticated:
-        return redirect('/chat/rabina/')
+        return redirect('/chat/user/')
     return render(request,'login.html')
 
 
@@ -57,6 +55,6 @@ def signup_view(request):
         messages.success(request, 'Signup successful! You can now log in.')
         return redirect('login')
     if request.user.is_authenticated:
-        return redirect('/chat/rabina/') #todo: pass usename
+        return redirect('/chat/user/') #todo: pass usename
     return render(request, 'signup.html')
 

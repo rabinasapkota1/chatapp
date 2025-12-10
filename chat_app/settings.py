@@ -65,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'chat.middleware.ActiveUserMiddleware',
 ]
 
 ROOT_URLCONF = 'chat_app.urls'
@@ -145,3 +146,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# settings.py
+TIME_ZONE = 'Asia/Kathmandu'
+USE_TZ = True

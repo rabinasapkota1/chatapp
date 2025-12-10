@@ -120,6 +120,26 @@
         <!-- User List Sidebar (4 Columns) -->
         <div class="col-3 sidebar p-3 chats">
           <h5 class="mb-3 text-white">Chats</h5>
+          <!-- Search Form aligned to the right -->
+   <form method="GET" action="" class="search-form d-flex">
+    <input
+        type="text"
+        name="username_search"
+        id="searchInput"
+        class="search-input form-control"
+        placeholder="Search username..."
+        value="{{ username_search }}"
+    />
+   <button type="submit" class="btn btn-light ml-2">
+    <i class="fas fa-search" style="color: black;"></i>
+</button>
+</form>
+{% if users|length == 0 %}
+<p class="text-white mt-3">No matching usernames found.</p>
+{% endif %}
+
+
+
           <div class="contacts">
             {% for item in user_last_messages %}
             <a
@@ -139,9 +159,17 @@
                 <!-- Message Content and Username -->
                 <div class="w-100">
                   <div class="d-flex justify-content-between">
-                    <strong class="text-truncate"
-                      >{{ item.user.username }}</strong
-                    >
+                    
+                   <strong class="text-truncate">
+    {{ item.user.username }}
+
+    {% if item.is_online %}
+      <span style="color: #00ff00; font-size: 12px;">● Online</span>
+    {% else %}
+      <span style="color: #ccc; font-size: 12px;">● Offline</span>
+    {% endif %}
+                  </strong>
+  
                     {% if item.last_message %}
                     <small class="text-nowrap timestamp">
                       {{ item.last_message.timestamp|date:"H:i" }}</small
@@ -221,6 +249,7 @@
             <p class="no-messages">No Messages.</p>
             {% endif %}
           </div>
+ 
 
           <!-- Message Input -->
           <div class="chat-input p-3">
@@ -273,7 +302,6 @@
       chatSocket.onclose = function (e) {
         console.log("Something unexpected happened!");
       };
-
       document.querySelector("#my_input").focus();
       document.querySelector("#my_input").onkeyup = function (e) {
         if (e.keyCode == 13) {
@@ -361,5 +389,6 @@
         }
       };
     </script>
+   
   </body>
 </html>
